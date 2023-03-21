@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function bag() {
+	thing = document.getElementById("first").value
+	divTag = document.getElementById("result")
+	
+	if (thing == "휴대폰") {
+		divTag.innerHTML = '<img src=img/phone.jpg width=300 height=250>'
+	} else if (thing == "시계") {
+		divTag.innerHTML = '<img src=img/watch.jpg width=300 height=250>'
+	} else {
+		divTag.innerHTML = '<img src=img/else.jpg width=300 height=250>'
+	}
+}
+</script>
+</head>
+<body>
+가방안에 들어있는 물건 중 제일 중요한 것 : <input id="first" value="휴대폰">
+<button onclick="bag()">제일 중요한 것 확인</button> <br>
+가방안에 들어있는 물건 중 제일 중요한 것 : <input id="second" value="시계">
+<button onclick="bag2()">제일 중요한 것 확인</button> <br>
+
+<hr>
+<div id="result" style="background: yellow; color: red; 
+			width: 500px; height: 300px; font-size: 30px"></div>
+</body>
+</html>
