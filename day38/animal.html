@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	$(function() {
+		&("#animal").click(function() {
+			$.ajax({
+				url : "data/animal.xml",
+				success : function(doc) {
+					list = $(doc).find("record").text()
+					alert("환자 수 : " + list.length)
+					for (var i = 0; i < list.length; i++) {
+						id = $(list[i]).find("id").text()
+						species = $(list[i]).find("species").text()
+						name = $(list[i]).find("name").text()
+						protector = $(list[i]).find("protector").text()
+						
+						$("#result").append("아이디 : " + id 
+								+ " / 종류 : " + species 
+								+ " / 동물 이름 : " + name 
+								+ " / 보호자 : " + protector)
+								
+						$.ajax({
+							url : "animal.jsp",
+							data : {
+								id : id,
+								species : species,
+								name : name,
+								protector : protector
+							},
+							success : function() {
+								console.log("성공!")
+							}	// success
+						})	// ajax
+					}	// for (list 돌리는 거)
+				}	// success
+			})	// ajax
+		})	// animal
+	})	// $func
+</script>
+</head>
+<body>
+<h3>멍멍동물병원 : 환자목록</h3>
+<button id="animal" style="background: yellow;">리스트 불러오기</button>
+<div id="reuslt"></div>
+</body>
+</html>

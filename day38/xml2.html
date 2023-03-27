@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#b1").click(function() {
+			$.ajax({
+				url : "data/dataset2.xml",
+				success : function(doc) {
+					alert("xml요청 성공 >> " + doc)
+					list = $(doc).find("record")
+					alert(list.length)
+					for(i = 0; i < list.length; i++){
+						id = $(list[i]).find('id').text()
+						model = $(list[i]).find('model').text()
+						color = $(list[i]).find('color').text()
+						money = $(list[i]).find('money').text()
+						$("#result").append(id + ", " 
+								+ model + ", "
+								+ color + ", " 
+								+ money + "<br>")
+						$.ajax({
+							url : "mock2.jsp",
+							async : "false",
+							data : {
+								id : id,
+								model : model,
+								color : color,
+								money : money,
+							},
+							success : function() {
+								console.log('넣기 성공!')
+							}	// success
+						})	// ajax
+					}	// for
+				}	// success
+			})	// ajax
+		})	// b1
+		
+/* 		$("#b2").click(function() {
+			$.ajax({
+				url : "data/dataset2.xml",
+				success : function(doc) {
+					alert("xml요청 성공 >> " + doc)
+					list = $(doc).find("record")
+					alert(list.length)
+					for(i = 0; i < list.length; i++){
+						id = $(list[i]).find('id').text()
+						model = $(list[i]).find('model').text()
+						color = $(list[i]).find('color').text()
+						money = $(list[i]).find('money').text()
+						$("#result").append(id + ", " 
+								+ model + ", "
+								+ color + ", " 
+								+ money + "<br>")
+						$.ajax({
+							url : "mock2.jsp",
+							async : "false",
+							data : {
+								id : id,
+								model : model,
+								color : color,
+								money : money,
+							},
+							success : function() {
+								console.log('넣기 성공!')
+							}	// success
+						})	// ajax
+					}	// for
+				}	// success
+			})	// ajax
+		})	// b1 */
+	})	// $
+</script>
+</head>
+<body bgcolor="pink">
+<button style='color: blue; background: beige' id ="b1">XML받아오기 </button> <br>
+<input id="del"> <button id="b2" style='color: blue; background: beige'>정보 삭제하기</button>
+<hr color="red">
+<div id="result"></div>
+</body>
+</html>
